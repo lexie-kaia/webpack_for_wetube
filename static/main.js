@@ -16,7 +16,7 @@
   \***************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./assets/scss/styles.scss\");\n\nconsole.log('hello world'); // babel-loader test\n\nvar name = '';\nvar userName = name !== null && name !== void 0 ? name : 'Guest';\nconsole.log(userName); // ''\n\n//# sourceURL=webpack://webpack_for_wetube/./assets/js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./assets/scss/styles.scss\");\n\nconsole.log('hello world'); // babel-loader test (ES11)\n\nvar name = '';\nvar userName = name !== null && name !== void 0 ? name : 'Guest';\nconsole.log(userName);\n\n//# sourceURL=webpack://webpack_for_wetube/./assets/js/main.js?");
 
 /***/ }),
 

@@ -4,7 +4,7 @@ webpack config description for youtube clone coding course in nomad coder
 
 <br>
 
-😭유튜브 클론 코딩 강의의 4.WEBPACK 파트를 넘어가기 위해 만든 자료입니다.
+😭유튜브 클론 코딩 강의의 **4.WEBPACK 파트**를 넘어가기 위해 만든 자료입니다.
 
 새롭게 배우는 내용과 수많은 에러로 고통받는 강의지만...  
 그만큼 많이 배우고 있는 강의라서  
@@ -35,14 +35,14 @@ webpack config description for youtube clone coding course in nomad coder
 
 ## 목차
 
-1. 웹팩설치하기
+1. 웹팩 설치하기
 2. 웹팩을 설정하는 `webpack.config.js` 파일 만들기
 3. `package.json`에 webpack을 실행하는 script 생성하기
-4. entry와 output 설정하기
-5. loader(module) 설정
-6. babel-loader 추가하기
-7. sass-loader 추가하기
-8. 웹팩 watch 실행하기
+4. `entry`와 `output` 설정하기
+5. loader(`module`) 설정
+6. `babel-loader` 추가하기
+7. `sass-loader` 추가하기
+8. 웹팩 `watch` 실행하기
 
 <br>
 
@@ -59,18 +59,19 @@ webpack config description for youtube clone coding course in nomad coder
 ## 2. 웹팩을 설정하는 `webpack.config.js` 파일 만들기
 
 - `webpack.config.js` 파일은 <u>웹팩이 실행되는 환경</u>을 설정하는 파일입니다.
+
 - 설정해야하는 웹팩 속성 5가지
 
-1. **entry**  
-   웹팩이 자원을 번들링하기 위해 접근하는 <u>최초의 자바스크립트 파일 경로</u> 설정
-2. **output**  
-   <u>아웃풋 파일의 경로와 파일 이름</u> 설정
-3. **loader(module)**  
-   웹팩이 최신버전의 자바스크립트나 자바스크립트 파일이 아닌 웹 자원(HTML, CSS, 이미지, 폰트 등)들을 해석하고 변환할 수 있도록 도와주는 속성
-4. **plugin**  
-   웹팩의 기본적인 동작 외에 추가적인 기능을 제공하는 속성
-5. **mode**  
-   실행 모드, `none`, `developement`(테스트 및 개발용), `production`(프로덕션 배포용)이 설정값으로 있음
+  1. **entry**  
+     웹팩이 자원을 번들링하기 위해 접근하는 <u>최초의 자바스크립트 파일 경로</u> 설정
+  2. **output**  
+     <u>아웃풋 파일의 경로와 파일 이름</u> 설정
+  3. **loader(module)**  
+     웹팩이 최신버전의 자바스크립트나 자바스크립트 파일이 아닌 웹 자원(HTML, CSS, 이미지, 폰트 등)들을 해석하고 변환할 수 있도록 도와주는 속성
+  4. **plugin**  
+     웹팩의 기본적인 동작 외에 추가적인 기능을 제공하는 속성
+  5. **mode**  
+     실행 모드, `none`, `developement`(테스트 및 개발용), `production`(프로덕션 배포용)이 설정값으로 있음
 
 <br>
 
@@ -78,12 +79,15 @@ webpack config description for youtube clone coding course in nomad coder
 
 ```json
 //package.json
+
   "scripts": {
     "dev:assets": "webpack --mode=development",
     "build:assets": "webpack --mode=production"
   },
-// --mode=를 이용하여 웹팩의 mode를 설정하여 실행할 수 있습니다.
 ```
+
+- `--mode=<mode>`를 이용하여 웹팩의 mode를 설정하여 실행할 수 있습니다.
+- `npm run dev:assets`, `npm run build:assets` 커맨드로 script를 실행할 수 있습니다.
 
 <br>
 
@@ -99,6 +103,7 @@ webpack config description for youtube clone coding course in nomad coder
 
 ```js
 // main.js
+
 import '../scss/styles.css';
 ```
 
@@ -111,6 +116,8 @@ import '../scss/styles.css';
     현재 파일이 위치한 디렉토리를 나타냅니다. (webpack.config.js파일의 현재 경로)
 
 ```js
+// webpack.config.js
+
 const path = require('path');
 
 const ENTRY_FILE = path.resolve(__dirname, 'assets', 'js', 'main.js');
@@ -168,8 +175,8 @@ const config = {
    `npm i -D babel-loader`
 
    - babel-loader가 실행되기 위해 필요한 파일
-   - [ ] @babel/core
-   - [ ] @babel/preset-env
+   - [ ] `@babel/core`
+   - [ ] `@babel/preset-env`
 
 2. **babel-loader 설정하기**
 
@@ -256,9 +263,10 @@ const config = {
       },
       {
         test: /\.s[ac]ss$/i,
+        // loader는 아래->위 순서로 실행됩니다. (sass->postcss->css->MiniCssExtract)
         use: [
           // JS에서 별도의 css 파일 추출
-          // -> 플러그인 설정에서 지정된 'styles.css'로 추출됩니다.
+          // 플러그인 설정에서 지정된 'styles.css'로 추출됩니다.
           MiniCssExtractPlugin.loader,
           // CSS를 CommonJS로 변환합니다.
           'css-loader',
@@ -282,17 +290,19 @@ const config = {
 
    ```js
    // postcss.config.js
+
    module.exports = {
      plugins: [require('autoprefixer')],
    };
    ```
 
    - `package.json` 파일의 `browserslist` 속성 추가하기  
-     autoprefixer는 자동으로 package.json의 browserslilst 속성을 참고합니다.
+     autoprefixer는 자동으로 `package.json`의 `browserslilst` 속성을 참고합니다.
      babel, eslint와 타겟 브라우저 설정을 공유하기 위해 이 방법이 권장됩니다.
 
    ```json
    // package.json
+
    "browserslist": [
      "cover 99.5%"
    ]
@@ -302,7 +312,7 @@ const config = {
 
 ## 8. 웹팩 watch 실행하기
 
-- `package.json` scripts 수정하기
+- `package.json` scripts에 `--watch`를 추가합니다.
 
 ```json
   "scripts": {
